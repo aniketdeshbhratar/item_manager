@@ -1,0 +1,58 @@
+<!-- nav -->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow nav sticky-top">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Iteam Manager App</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-danger" (click)="openPopup()" href="#">Favourites</a>
+        <a class="p-2 text-secondary disabled-anchor " href="#">Buy</a>
+        <a class="p-2 text-secondary disabled-anchor " href="#">Sell</a>
+        <a class="p-2 text-secondary disabled-anchor " href="#">Login</a>
+        <a class="p-2 text-secondary disabled-anchor " href="#">Pro</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+
+<!-- favourite list modal  -->
+<div class="modal modal-fullscreen-xl" id="modal-fullscreen-xl" tabindex="-1" role="dialog" aria-hidden="true" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Favourite Items</h5>
+          <button type="button" class="close" 
+          (click)="closePopup()"
+          data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- search box -->
+            <div class="row" *ngIf="favoritesList.length > 0;else no_result">
+                <div class="search-box mb-3">
+                    <form #searchForm="ngForm" class="search-box-form">
+                        <input 
+                        class="search-box-input"
+                        type="text"
+                        name="search"
+                        placeholder="Search..."
+                        [(ngModel)]="searchInput" (keyup)="onSearch($event)"
+                    >
+                    </form>
+                </div>
+            </div>
+            <ng-template #no_result><h3 class="no-result">No item found in favorites</h3></ng-template>
+            <!-- favList list -->
+            <div class="row justify-content-center " *ngIf="favListdata$ | async as items">
+                <h3 *ngIf="items.length === 0" class="no-result p-3">No result found</h3>
+                <div *ngFor="let f of favoritesList">
+                    <div *ngFor="let item of items">
+                        <ng-container *ngIf="f === item.id" class="col-lg-3 col-md-6 offset-md-0 offset-sm-1 col-sm-10 offset-sm-1 my-lg-0 my-2">
+                            <app-fav-list
+                            [FavListDetails]="item"
+                        ></app-fav-list>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

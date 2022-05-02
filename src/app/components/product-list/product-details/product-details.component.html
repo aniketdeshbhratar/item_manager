@@ -1,0 +1,15 @@
+<div *ngIf="selectedItem | async as itemDetails" class="row">
+    <div class="col-sm-6">
+      <div class="card mb-3">
+        <img class="card-img-top" src="{{itemDetails.image}}">
+        <div class="card-body">
+          <h5 class="card-title">{{itemDetails.title}} | {{itemDetails.price | currency: 'EUR'}}</h5>
+          <p class="card-text">{{itemDetails.description}}</p>
+          <p class="card-text"><small class="text-muted"> Email: <a href="mailto:{{itemDetails.email}}">{{itemDetails.email}}</a></small></p>
+        </div>
+      </div>  
+    </div>
+    <div class="col">
+      <button (click)="back()" class="btn btn-outline-dark">Back</button>
+    </div>
+</div>

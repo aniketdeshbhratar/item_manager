@@ -1,0 +1,35 @@
+.card {
+    
+    .box{
+        height: 250px;
+        display: flex;
+
+        img{
+            object-fit: cover;
+        }
+    }    
+    border: 1px solid #ccc7ff;
+    border-radius: 20px;
+    &-text {
+        &-price{
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            color:#7065f0;
+        }
+        &-title {
+            font-size: 17px;
+        }
+        &-description{
+            color: #717171;
+            font-size: 13px;
+            height: 50px;
+        }
+        &-email{
+            word-break: break-all;
+            height: 57px;
+            border-bottom: 1px solid #e2e2e2;
+            color:black !important;
+        }
+    }
+}

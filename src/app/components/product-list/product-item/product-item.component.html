@@ -1,0 +1,31 @@
+<div class="card mb-4 box-shadow" id="{{itemDetails.id}}">
+  <div class="box">
+    <img class="card-img-top" src={{itemDetails.image}}>
+  </div>
+    
+    <div class="card-body">
+        
+        <p class="card-text-price">
+           {{itemDetails.price | currency: 'EUR'}}
+        </p>
+        <p class="card-text-title">{{itemDetails.title}}</p>
+      <p class="card-text-description">{{itemDetails.description | slice: 0:80}}...</p>
+      <p class="mb-0 card-text-email">Email: <a href="mailto:{{itemDetails.email}}">{{itemDetails.email}}</a></p>
+      <p></p>
+      <div class="d-flex justify-content-around align-items-center">
+          
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-dark"
+            [routerLink]="['/item-details', itemDetails.id]">View</button>
+
+            <button
+                type="button" 
+                class="btn btn-sm "
+                [ngClass]="{'btn-outline-danger': favorites,
+                 'btn-danger': !favorites}"
+                (click)="addToFavorites(itemDetails.id)"
+            >Add to Favourites</button>
+        </div>
+      </div>
+    </div>
+</div>

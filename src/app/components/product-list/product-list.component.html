@@ -1,0 +1,37 @@
+<!-- search box  -->
+<div class="row justify-content-center">
+    <div class="search-box">
+        <form #searchForm="ngForm" class="search-box-form">
+            <input 
+            class="search-box-input"
+            type="text"
+            name="search"
+            placeholder="Search..."
+            [(ngModel)]="searchInput" (keyup)="onSearch($event)"
+        >
+        </form>
+    </div>
+</div>
+<!-- sort and total count -->
+<div class="d-flex justify-content-between align-items-center search-filter">
+    <div>Search result : <span>{{(alldata$ | async)?.length}}</span></div>
+    <div> <span>Sort by: </span> 
+        <select name="sort" #sort id="sort" class="custom-select" (change)="onSort($event)">
+            <option value="" disabled selected>Default</option>
+            <option value="title">Title</option>
+            <option value="description">Description</option>
+            <option value="price">Price</option>
+            <option value="email">Email</option>
+        </select> 
+    </div>
+</div>
+<!-- search result  -->
+<div class="row search-results" *ngIf="alldata$ | async as items">
+    <h3 *ngIf="items.length === 0" class="no-result">No result found</h3>
+    <div class="col-lg-3 col-md-6 offset-md-0 offset-sm-1 col-sm-10 offset-sm-1 my-lg-0 my-2" *ngFor="let item of items">
+        
+        <app-product-item
+            [itemDetails]="item"
+        ></app-product-item>
+    </div>
+</div>
